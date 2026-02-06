@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 20:15:26 by didimitr          #+#    #+#             */
-/*   Updated: 2026/02/04 17:31:24 by didimitr         ###   ########.fr       */
+/*   Updated: 2026/02/06 01:05:13 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,27 @@
 
 class Bureaucrat;
 
-class Form {
+class AForm {
     private:
         std::string const _name;
         bool _sign;
         int const _gradeSign;
         int const _gradeExec;
-    
+        std::string _target;
     public:
-        Form();
-        Form(const std::string& name, bool sign, int const gradeSign, int const gradeExec);
-        Form(const Form& other);
-        Form& operator=(const Form& other);
-        ~Form();
+        AForm();
+        AForm(const std::string& name, bool sign, int const gradeSign, int const gradeExec, std::string target);
+        AForm(const AForm& other);
+        AForm& operator=(const AForm& other);
+        ~AForm();
 
         const std::string& getName() const;
         void beSigned(Bureaucrat& bureaucrat);
         bool getSignStatus() const;
         int getGradeSign() const;
         int getGradeExec() const;
-
+        const std::string& getTarget() const;
+        void execute(Bureaucrat const& executor) const;
         class GradeTooHighException : public std::exception {
             public:
                 const char* what() const throw();
@@ -45,6 +46,13 @@ class Form {
             public:
                 const char* what() const throw();
         };
+        class FormNotSignedException : public std::exception {
+            public:
+                const char* what() const throw();
+        };
+        protected:
+            virtual void executeAction() const = 0;
+
 };
 
-std::ostream& operator<<(std::ostream& os, const Form& data);
+std::ostream& operator<<(std::ostream& os, const AForm& data);

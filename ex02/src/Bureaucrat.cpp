@@ -6,12 +6,12 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 12:08:01 by didimitr          #+#    #+#             */
-/*   Updated: 2026/02/04 17:31:06 by didimitr         ###   ########.fr       */
+/*   Updated: 2026/02/06 00:07:24 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Bureaucrat.hpp"
-#include "../include/Form.hpp"
+#include "../include/AForm.hpp"
 #include <iostream>
 
 Bureaucrat::Bureaucrat()
@@ -49,7 +49,7 @@ int Bureaucrat::getGrade(void) const{
     return(this->_grade);
 }
 
-void Bureaucrat::signForm(Form& form){
+void Bureaucrat::signForm(AForm& form){
     try{
         form.beSigned(*this);
         std::cout << this->getName() << " signed " << form.getName() << std::endl;
@@ -82,6 +82,17 @@ void Bureaucrat::decrementGrade(void){
         throw GradeTooLowException();
     }
     this->_grade++;
+}
+
+void Bureaucrat::executeForm(AForm const& form) const {
+    try{
+    form.execute(*this);
+    std::cout << this->getName() << " executed " << form.getName() << std::endl;
+    }
+    catch(std::exception& e){
+        std::cout << this->getName() << " couldn't execute " << form.getName() 
+            << " because " << e.what() << std::endl;
+    }
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& b){
