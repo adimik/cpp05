@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:23:15 by didimitr          #+#    #+#             */
-/*   Updated: 2026/02/05 23:14:57 by didimitr         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:48:09 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include <fstream>
-
-
 
 class ShrubberyCreationForm : public AForm {
     public:

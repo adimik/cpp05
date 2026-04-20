@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AAForm.cpp                                          :+:      :+:    :+:   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 20:15:47 by didimitr          #+#    #+#             */
-/*   Updated: 2026/02/04 21:16:33 by didimitr         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:48:07 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ AForm::AForm(const std::string& name, bool sign, int const gradeSign, int const 
     : _name(name), _sign(sign), _gradeSign(gradeSign), _gradeExec(gradeExec), _target(target)
 {    
     if(gradeSign > 150 || gradeExec > 150)
-        throw GradeTooLowException();
-    else if(gradeSign < 1 || gradeExec < 1)
         throw GradeTooHighException();
+    else if(gradeSign < 1 || gradeExec < 1)
+        throw GradeTooLowException();
 }
 
 AForm::AForm(const AForm& other)

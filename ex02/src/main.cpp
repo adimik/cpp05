@@ -1,6 +1,8 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -8,19 +10,48 @@
 int main()
 {
     std::srand(std::time(0));
-    Bureaucrat a("Pepa", 1);
-    Bureaucrat c("Franta", 1);
-    ShrubberyCreationForm b("Sracka");
-    RobotomyRequestForm r("R2D2");
-    RobotomyRequestForm s("R2D3");
-    PresidentialPardonForm amnesty("Dimik");
-    c.signForm(amnesty);
-    c.signForm(s);
-    c.signForm(r);
-    c.signForm(b);
-    a.executeForm(b);
-    a.executeForm(r);
-    a.executeForm(s);
-    a.executeForm(amnesty);
+    
+    std::cout << "========== BUREAUCRAT FORM EXECUTION TEST ==========" << std::endl;
+    std::cout << std::endl;
+    
+    // Create bureaucrats with different grades
+    Bureaucrat ceo("CEO", 1);
+    Bureaucrat manager("Manager", 50);
+    Bureaucrat intern("Intern", 150);
+    
+    std::cout << "--- BUREAUCRATS CREATED ---" << std::endl;
+    std::cout << ceo << std::endl;
+    std::cout << manager << std::endl;
+    std::cout << intern << std::endl;
+    std::cout << std::endl;
+    
+    // Create forms
+    ShrubberyCreationForm garden("garden");
+    RobotomyRequestForm robot("R2D2");
+    PresidentialPardonForm pardon("Prisoner");
+    
+    std::cout << "--- SIGNING FORMS (Manager attempts) ---" << std::endl;
+    manager.signForm(garden);
+    manager.signForm(robot);
+    manager.signForm(pardon);
+    std::cout << std::endl;
+    
+    std::cout << "--- EXECUTING FORMS (CEO attempts) ---" << std::endl;
+    ceo.executeForm(garden);
+    ceo.executeForm(robot);
+    ceo.executeForm(robot);  // Second robotomy attempt
+    ceo.executeForm(pardon);
+    std::cout << std::endl;
+    
+    std::cout << "--- INTERN ATTEMPTS (should fail) ---" << std::endl;
+    ShrubberyCreationForm task("house");
+    intern.signForm(task);      // Will fail - insufficient grade
+    ceo.signForm(task);         // CEO signs it
+    intern.executeForm(task);   // Will fail - insufficient grade
+    ceo.executeForm(task);      // CEO executes it
+    std::cout << std::endl;
+    
+    std::cout << "========== TEST COMPLETE ==========" << std::endl;
+    
     return(0);
 }

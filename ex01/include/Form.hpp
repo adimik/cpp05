@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 20:15:26 by didimitr          #+#    #+#             */
-/*   Updated: 2026/02/04 17:31:24 by didimitr         ###   ########.fr       */
+/*   Updated: 2026/04/20 14:58:05 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ class Bureaucrat;
 
 class Form {
     private:
-        std::string const _name;
+        const std::string _name;
         bool _sign;
-        int const _gradeSign;
-        int const _gradeExec;
+        const int _gradeSign;
+        const int _gradeExec;
     
     public:
         Form();
-        Form(const std::string& name, bool sign, int const gradeSign, int const gradeExec);
+        Form(const std::string& name, int const gradeSign, int const gradeExec);
         Form(const Form& other);
         Form& operator=(const Form& other);
         ~Form();

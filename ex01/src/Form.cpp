@@ -6,7 +6,7 @@
 /*   By: didimitr <didimitr@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 20:15:47 by didimitr          #+#    #+#             */
-/*   Updated: 2026/02/04 17:31:21 by didimitr         ###   ########.fr       */
+/*   Updated: 2026/04/20 14:57:55 by didimitr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ Form::Form()
     : _name("default"), _sign(false), _gradeSign(150), _gradeExec(150)
 {
 }
-Form::Form(const std::string& name, bool sign, int const gradeSign, int const gradeExec) 
-    : _name(name), _sign(sign), _gradeSign(gradeSign), _gradeExec(gradeExec)
+Form::Form(const std::string& name, int const gradeSign, int const gradeExec) 
+    : _name(name), _sign(false), _gradeSign(gradeSign), _gradeExec(gradeExec)
 {    
     if(gradeSign > 150 || gradeExec > 150)
         throw GradeTooLowException();
@@ -42,10 +42,10 @@ Form::~Form()
 {}
 
 void Form::beSigned(Bureaucrat& bureaucrat){
-    if(bureaucrat.getGrade() <= this->_gradeSign)
-        this->_sign = true;
+    if(bureaucrat.getGrade() > this->_gradeSign)
+        throw GradeTooLowException();
     else
-        throw GradeTooHighException();
+        this->_sign = true;
 }
 
 bool Form::getSignStatus() const {
